@@ -19,3 +19,9 @@ Usage
 ::
 
     ./echoz.sh user@domain password
+
+Testimonials
+------------
+
+* *This is crazy, I haven't crashed it yet!* — `Matthew Wild <https://github.com/mwild1>`_
+* *oh my god this actually works* — `Test <xmpp:test@hub.sotecware.net>`_

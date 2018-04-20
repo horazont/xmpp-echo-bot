@@ -32,4 +32,5 @@ Testimonials
 ------------
 
 * *This is crazy, I haven't crashed it yet!* — `Matthew Wild <https://github.com/mwild1>`_
+* *With Echoz.sed, we were able to reduce our XMPP Echo server costs by 90% compared to our previous TeX-based solution.* — Leon
 * *oh my god this actually works* — `Test <xmpp:test@hub.sotecware.net>`_

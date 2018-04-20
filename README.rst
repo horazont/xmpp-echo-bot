@@ -22,6 +22,12 @@ Usage
 
     ./echoz.sh user@domain password
 
+Supported XEPs
+--------------
+
+* `XEP-0092 (Software Version) <https://xmpp.org/extensions/xep-0092.html>`_
+* `XEP-0199 (XMPP Ping) <https://xmpp.org/extensions/xep-0199.html>`_
+
 Testimonials
 ------------
 

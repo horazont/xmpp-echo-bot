@@ -120,7 +120,7 @@ s#^(.+)$#<iq \1>#;
 # store result in hold space and fetch original header for further processing
 x;
 
-/type='get'/bsend-error;
+/type='get'/bhandle-iq-get;
 /type='set'/bsend-error;
 bmain-loop;
 
@@ -135,4 +135,22 @@ bskip-iq;
 # skip remainder of IQ payload until done
 /<\/iq/bmain-loop;
 n;
+bskip-iq;
+
+:handle-iq-get;
+n;
+/<query xmlns=["']jabber:iq:version["']/bhandle-software-version;
+/<ping xmlns=["']urn:xmpp:ping["']/bhandle-ping;
+bsend-error;
+
+:handle-software-version;
+g;
+s#^<iq (.+)>$#<iq type='result' \1><query xmlns='jabber:iq;version'><name>sedbot</name><version>0.0.1</version><os/></query></iq>#;
+p;n;
+bskip-iq;
+
+:handle-ping;
+g;
+s#^<iq (.+)>$#<iq type='result' \1><ping xmlns='urn:xmpp:ping'/></iq>#;
+p;n;
 bskip-iq;

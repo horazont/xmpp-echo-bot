@@ -5,6 +5,8 @@ Do you know that situation, you really really need an XMPP echo bot, but you don
 
 This is an XMPP echo bot written in (mostly) sed. Bash is used to do the pre-authentication setup (look up DNS records, establish TLS via ``openssl s_client``). sed processes the XML stream and handles all interaction with the server on the XMPP level. Yes, this kinda parses XML in sed.
 
+Tested to work against Prosody 0.9.
+
 Tricks and shortcuts
 --------------------
 

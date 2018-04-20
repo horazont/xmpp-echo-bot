@@ -61,6 +61,9 @@ bmain-loop;
 
 :main-loop;
 /<message/bhandle-message;
+/<iq/bhandle-iq;
+# no handler, convert to single space, emit and continue
+s#^.+$# #;p;
 n;
 bmain-loop;
 
@@ -100,3 +103,36 @@ g;
 s#^(.+)$#\1</message>#;
 p;n;
 bmain-loop;
+
+:handle-iq;
+# prepare header; store it in hold space first
+h;
+# extract new to address
+s#^.*from=(['"][^'"]+?['"]).*$#to=\1\n#;
+# add copy of header and extract new from address
+G;
+s#^(.+)\n.+to=(['"][^'"]+?['"]).*$#\1 from=\2#;
+# add copy of header and extract id
+G;
+s#^(.+)\n.+id=(['"][^'"]+?['"]).*$#\1 id=\2#;
+# compose header
+s#^(.+)$#<iq \1>#;
+# store result in hold space and fetch original header for further processing
+x;
+
+/type='get'/bsend-error;
+/type='set'/bsend-error;
+bmain-loop;
+
+:send-error;
+# load composed header from hold space
+g;
+s#^<iq (.+)>$#<iq type='error' \1><error><service-unavailable xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/><text xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'>Feature not implemented by sedbot.</text></error></iq>#;
+p;n;
+bskip-iq;
+
+:skip-iq;
+# skip remainder of IQ payload until done
+/<\/iq/bmain-loop;
+n;
+bskip-iq;

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euf
-thisdir="$(dirname $0)"
+thisdir="$(dirname "$0")"
 pipename="${XDG_RUNTIME_DIR:-/tmp}/echoz-$$.pipe"
 jid="$1"
 password="$2"
